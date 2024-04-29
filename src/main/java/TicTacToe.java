@@ -149,22 +149,7 @@ public class TicTacToe {
     @Override
     public String toString() {
         String s = "";
-        for (int row = 0; row < board.length; row++) {
-            for (int col = 0; col < board[row].length; col++) {
-                if (board[row][col] == null) {
-                    s += "-";
-                } else {
-                    s += board[row][col].toString();
-                }
-                if (col < board[row].length - 1) {
-                    s += " | ";
-                }
-            }
-            s += "\n";
-            if (row < board.length - 1) {
-                s += "---------\n";
-            }
-        }
+        //TO DO
         return s;
     }
 }
