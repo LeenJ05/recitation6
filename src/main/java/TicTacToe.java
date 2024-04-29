@@ -11,6 +11,7 @@ public class TicTacToe {
     private GamePiece[] player;
     private int nextPlayerIndex;
     private int numOfMoves;
+    private char[] symbols;
 
     public TicTacToe(GamePiece p1, GamePiece p2) {
         board = new GamePiece[3][3];
@@ -40,7 +41,7 @@ public class TicTacToe {
      * @return true if the location is NOT occupied by a game piece; false otherwise
      */
     public boolean isEmpty(int location) {
-        int row = location /3;
+        int row = location / 3;
         int col = location % 3;
         return board[row][col] == null;
     }
@@ -80,19 +81,19 @@ public class TicTacToe {
                 {0, 4, 8}, {2, 4, 6}             // diagonal winning combinations
         };
 
-        for (int[] combo : combos){
-            int row1 = combo[0] /3;
-            int col1 = combo[0] %3;
-            int row2 = combo[1] /3;
-            int col2 = combo[1] %3;
-            int row3 = combo[2] /3;
-            int col3 = combo[2] %3;
+        for (int[] combo : combos) {
+            int row1 = combo[0] / 3;
+            int col1 = combo[0] % 3;
+            int row2 = combo[1] / 3;
+            int col2 = combo[1] % 3;
+            int row3 = combo[2] / 3;
+            int col3 = combo[2] % 3;
 
             GamePiece piece1 = board[row1][col1];
             GamePiece piece2 = board[row2][col2];
             GamePiece piece3 = board[row3][col3];
 
-            if (piece1 != null && piece1.equals(piece2)&& piece1.equals(piece3)){
+            if (piece1 != null && piece1.equals(piece2) && piece1.equals(piece3)) {
                 winner = new GamePiece(piece1);
                 break;
             }
@@ -103,6 +104,7 @@ public class TicTacToe {
 
     /**
      * Indicates the current player by returning the current player's game piece
+     *
      * @return the current player's game piece.
      */
     public GamePiece getCurrentPlayer() {
@@ -112,6 +114,7 @@ public class TicTacToe {
     /**
      * Places a game piece at the provided location if and only if the location is valid and is empty.  Returns
      * true if the operation is successful; false otherwise
+     *
      * @param location the integer representation of the square.
      * @return true if it is able to place a game piece at the specified location; false otherwise
      */
@@ -130,8 +133,8 @@ public class TicTacToe {
      */
     public void clear() {
         // set all elements of 2d array to null
-        for (int i = 0; i < board.length; i++){
-            for (int j = 0; j < board[i].length; j++){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = null;
             }
         }
@@ -140,12 +143,28 @@ public class TicTacToe {
 
     /**
      * Returns a string representation of the board
+     *
      * @return a string representation of the board
      */
     @Override
     public String toString() {
         String s = "";
-        // TODO: add code here
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board[row].length; col++) {
+                if (board[row][col] == null) {
+                    s += "-";
+                } else {
+                    s += board[row][col].toString();
+                }
+                if (col < board[row].length - 1) {
+                    s += " | ";
+                }
+            }
+            s += "\n";
+            if (row < board.length - 1) {
+                s += "---------\n";
+            }
+        }
         return s;
     }
 }
